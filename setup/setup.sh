@@ -10,3 +10,5 @@ sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin prohibit-password/'
 sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
 
 sed -i 's/#MaxAuthTries 6/MaxAuthTries 1/' /etc/ssh/sshd_config
+
+systemctl disable ssh
