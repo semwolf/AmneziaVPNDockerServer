@@ -1,0 +1,29 @@
+version: '3'
+services:
+  ssh-service:
+    build: .
+    ports:
+      - "2222:22"
+      # - "450:450"
+      # - "450:450/udp"
+      # - "451:451"
+      # - "451:451/udp"
+      # - "452:452"
+      # - "452:452/udp"
+      # - "453:453"
+      # - "453:453/udp"
+      # - "454:454"
+      # - "454:454/udp"
+      # - "455:455"
+      # - "455:455/udp"
+      # - "456:456"
+      # - "456:456/udp"
+      # - "457:457"
+      # - "457:457/udp"
+      # - "458:458"
+      # - "458:458/udp"
+      # - "459:459"
+      # - "459:459/udp"
+    volumes:
+      - ./authorized_keys:/root/.ssh/authorized_keys
+      - /var/run/docker.sock:/var/run/docker.sock  # Docker socket
