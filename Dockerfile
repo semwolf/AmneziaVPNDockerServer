@@ -12,7 +12,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt install -y lsof psmisc && \
     DEBIAN_FRONTEND=noninteractive /tmp/setup/install-docker.sh
 
 # only for the debug purpose
-RUN DEBIAN_FRONTEND=noninteractive apt install -y mc nano screen htop net-tools
+# RUN DEBIAN_FRONTEND=noninteractive apt install -y mc nano screen htop net-tools
 
 COPY setup /tmp/setup
 
