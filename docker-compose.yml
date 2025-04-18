@@ -9,7 +9,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock  # Docker socket
       - ./authorized_keys:/root/.ssh/authorized_keys
-      # - ./ssh-keys:/etc/ssh/server-keys
+      - ./ssh-keys:/etc/ssh/server-keys
     tty: true
     networks:
       - my

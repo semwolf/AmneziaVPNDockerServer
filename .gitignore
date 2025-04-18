@@ -1,3 +1,4 @@
 /.idea
 /ssh-keys/*
 /keys/*
+authorized_keys
