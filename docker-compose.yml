@@ -1,10 +1,17 @@
-version: '3'
+version: '3.7'
+
 services:
-  ssh-service:
+  sshd:
     build: .
+    container_name: "amnezia"
     ports:
       - "2222:22"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock  # Docker socket
       - ./authorized_keys:/root/.ssh/authorized_keys
-      - ./ssh-keys:/etc/ssh/server-keys
+      # - ./ssh-keys:/etc/ssh/server-keys
+    tty: true
+    networks:
+      - my
+networks:
+  my:

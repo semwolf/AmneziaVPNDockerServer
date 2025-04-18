@@ -4,11 +4,15 @@ FROM ubuntu:24.04
 RUN DEBIAN_FRONTEND=noninteractive apt update && \
     DEBIAN_FRONTEND=noninteractive apt install -y bash sudo openssh-server libgcrypt20 && \
     cd /etc/ssh && \
-    rm ssh_host_ecdsa_key ssh_host_ecdsa_key.pub ssh_host_ed25519_key ssh_host_ed25519_key.pub ssh_host_rsa_key ssh_host_rsa_key.pub && \
-    mkdir /var/run/sshd
+    # rm ssh_host_ecdsa_key ssh_host_ecdsa_key.pub ssh_host_ed25519_key ssh_host_ed25519_key.pub ssh_host_rsa_key ssh_host_rsa_key.pub && \
+    mkdir /var/run/sshd && \
+    chmod 0755 /var/run/sshd
+
+COPY setup /tmp/setup
+COPY my-ssh.conf /etc/ssh/sshd_config.d/my-ssh.conf
+RUN chmod +x /etc/ssh/sshd_config.d/my-ssh.conf
 
 # Preinstall packages for AmneziaVPN
-COPY setup/install-docker.sh /tmp/setup/install-docker.sh
 RUN DEBIAN_FRONTEND=noninteractive apt install -y lsof psmisc && \
     chmod +x /tmp/setup/install-docker.sh && \
     DEBIAN_FRONTEND=noninteractive /tmp/setup/install-docker.sh
@@ -16,11 +20,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt install -y lsof psmisc && \
 # only for the debug purpose
 # RUN DEBIAN_FRONTEND=noninteractive apt install -y mc nano screen htop net-tools
 
-COPY setup /tmp/setup
-
 # Run set-up script
 RUN chmod +x /tmp/setup/*.sh && \
     DEBIAN_FRONTEND=noninteractive /tmp/setup/setup.sh
 
 # Starting SSH-daemon
-CMD ["/tmp/setup/start.sh"]
+ENTRYPOINT ["/tmp/setup/start.sh"]
